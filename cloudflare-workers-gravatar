@@ -13,7 +13,7 @@ const blocked_ip_address = ['0.0.0.0', '127.0.0.1']
 // 替换成你想镜像的站点
 const replace_dict = {
     '$upstream': '$custom_domain',
-    '//gravatar.com': ''
+    '//gravatar.com: ''
 }
  
 //以下内容都不用动
