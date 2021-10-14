@@ -1,7 +1,17 @@
  server{
-                listen       80;
+                listen 80;
+                listen 443 ssl;
                 server_name gravatar.lingchenzi.com;
-
+                ssl_certificate /usr/local/nginx/conf/ssl/gravatar.lingchenzi.com.crt;
+                ssl_certificate_key /usr/local/nginx/conf/ssl/gravatar.lingchenzi.com.key;
+                
+                //防盗链规则，如果不需要，可以去掉
+                valid_referers none blocked *.lingchenzi.com lingchenzi.com;
+                if ($invalid_referer) {
+                       return 403;
+                }
+                
+                
                 location /avatar/ {
                        proxy_redirect     off;
                        proxy_set_header   Host $host;
