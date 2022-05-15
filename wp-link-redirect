@@ -1,0 +1,16 @@
+//站外链转为内链
+
+function inlo_redirect() {
+$baseurl = 'go';
+$request = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; //如果启用了https，请将http改为https
+$hop_base = trailingslashit(trailingslashit(home_url()).$baseurl); //删除末尾的 斜杠/ 符号
+if (substr($request,0,strlen($hop_base)) != $hop_base) return false;
+$hop_key = str_ireplace($hop_base, '', $request);
+if(substr($hop_key, -1) == '/')$hop_key = substr($hop_key, 0, -1);
+if (!empty($hop_key)) {
+$url = base64_decode($hop_key);
+wp_redirect( $url, 302 );
+exit;
+}
+}
+add_action('template_redirect','inlo_redirect');
