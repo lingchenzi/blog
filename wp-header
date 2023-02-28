@@ -1,7 +1,7 @@
 <title><?php wp_title( '_', true, 'right' ); ?></title>
 <?php
 	$keywords = "关键词1,关键字2";
-	$description ="网站描述，一般是200个字左右";
+	$description ="网站描述，一般是100个字左右";
 	//文章页
 	if (is_single()){
 		//自定义栏目添加关键字和描述
