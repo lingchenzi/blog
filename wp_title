@@ -1,4 +1,8 @@
 /**
+下面对代码需要放在functions.php中
+*/
+
+/**
  * Filter the page title.
  *
  * Creates a nicely formatted and more specific title element text
