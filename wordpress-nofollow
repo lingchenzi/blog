@@ -1,0 +1,12 @@
+//文章与页面外链自动添加nofollow
+function add_nofollow_to_external_links($content) {
+    $regexp = '/<a\s[^>]*href=(\"??)([^\" >]*?)\\1[^>]*>/i';
+    preg_match_all($regexp, $content, $matches, PREG_SET_ORDER);
+    foreach ($matches as $match) {
+        if (!strstr($match[2], home_url())) {
+            $content = str_replace($match[0], str_replace('<a ', '<a rel="nofollow" ', $match[0]), $content);
+        }
+    }
+    return $content;
+}
+add_filter('the_content', 'add_nofollow_to_external_links');
