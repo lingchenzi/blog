@@ -1,0 +1,14 @@
+//修改文章别名为文章id
+function change_post_slug_to_id($post_id) {
+    $post = get_post($post_id);
+    if ($post->post_type == 'post' && $post->post_status == 'publish') {
+        $new_slug = $post_id;
+        remove_action('save_post', 'change_post_slug_to_id'); // 避免死循环
+        wp_update_post(array(
+            'ID' => $post_id,
+            'post_name' => $new_slug,
+        ));
+        add_action('save_post', 'change_post_slug_to_id');
+    }
+}
+add_action('save_post', 'change_post_slug_to_id');
